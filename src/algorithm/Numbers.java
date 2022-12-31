@@ -6,18 +6,71 @@ import java.util.List;
 import java.util.Random;
 
 public class Numbers {
+	public class Sort{
+		private long startTime,stopTime;
+		public long executionTime;
+		//--------------------
+		public void selectionSort(int num[]){
+			startTime = System.nanoTime();
+			int N = num.length;
+			for (int i = 0; i < N-1; i++) {
+				int min_idx = i;
+				for (int j = i+1; j < N; j++){
+					if (num[j] < num[min_idx])
+						min_idx = j;
+				}
+				int temp = num[min_idx];
+				num[min_idx] = num[i];
+				num[i] = temp;
+			}
+			stopTime = System.nanoTime();
+			executionTime=stopTime-startTime;
+		}
+		//---------------------
+		public void insertionSort(int num[]){
+			startTime = System.nanoTime();
+			int n = num.length;
+			for (int i = 1; i < n; ++i) {
+				int k = num[i];
+				int j = i - 1;
+
+				while (j >= 0 && num[j] > k) {
+					num[j + 1] = num[j];
+					j = j - 1;
+				}
+				num[j + 1] = k;
+			}
+			stopTime = System.nanoTime();
+			executionTime=stopTime-startTime;
+		}
+		//------------------------
+		public void bubbleSort(int num[]){
+			startTime = System.nanoTime();
+			int N = num.length;
+			for (int i = 0; i < N-1; i++)
+				for (int j = 0; j < N-i-1; j++)
+					if (num[j] > num[j+1])
+					{
+						int temp = num[j];
+						num[j] = num[j+1];
+						num[j+1] = temp;
+					}
+			stopTime = System.nanoTime();
+			executionTime=stopTime-startTime;
+		}
+	}
 
 	/*
 	 * Show all the different kind of sorting algorithm by applying into (num array).
 	 * Display the execution time for each sorting.Example in below.
 	 *
-	 * Use any databases[MongoDB, Oracle or MySql] to store data and retrieve data.
+	 * Use any databases[MongoDBDB, Oracle or MySql] to store data and retrieve data.
 	 *
 	 * At the end. After running all the sorting algo, come to a conclusion which one is suitable on given data set.
 	 *
 	 */
 
-	public static void main(String[] args) throws Exception {
+	public void main(String[] args) throws Exception {
 		
 		int [] num = new int[1000000];
 		storeRandomNumbers(num);
